@@ -51,8 +51,10 @@ def logout():
     return 'Logged out'
 
 #@app.route('/salt',methods = ['POST', 'GET'])
-#def salt():
-    ...
+# $2a$12$R34/rrqUKhdicsq8cqUwyOK6lu9qgBUZZ0kllddRWDcPsidTF9SCG
+@app.route('/salt',methods = ['POST', 'GET'])
+def salt():
+        return "$2a$12$R34/rrqUKhdicsq8cqUwyOK6lu"
 
 #Flask Login
 login_manager = flask_login.LoginManager()
