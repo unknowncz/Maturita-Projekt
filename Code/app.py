@@ -50,10 +50,10 @@ def logout():
     flask_login.logout_user()
     return 'Logged out'
 
-#@app.route('/salt',methods = ['POST', 'GET'])
 # $2a$12$R34/rrqUKhdicsq8cqUwyOK6lu9qgBUZZ0kllddRWDcPsidTF9SCG
 @app.route('/salt',methods = ['POST', 'GET'])
 def salt():
+    if request.args.get('username') == "aaa":
         return "$2a$12$R34/rrqUKhdicsq8cqUwyOK6lu"
 
 #Flask Login
