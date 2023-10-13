@@ -13,16 +13,16 @@
                 <span><a>Log in</a></span>
                 <span><a>Register</a></span>
             </div>
-            <form action='login' method='POST'>
-                <input type='text' name='email' id='email' placeholder='email'/>
-                <input type='password' name='password' id='password' placeholder='password'/>
-                <input type='submit' name='submit'/>
-            </form>
+            <input type='text' name='email' id='email' placeholder='email'/>
+            <input type='password' name='password' id='password' placeholder='password'/>
+            <input type='submit' id="login" name='submit'/>
         </div>
     </div>
 
 
-<script src="static/js/dist/bcrypt.min.js"></script>
+<!--<script src="static/js/dist/bcrypt.min.js"></script>--><script src="
+https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js
+"></script>
 
 <script>
     var menu = document.getElementById('menu');
@@ -40,31 +40,30 @@
 
     login_submit.onclick = function(){
         //send ajax request
-        var username = document.getElementsByTagName('input')[0].value;
-        var password = document.getElementsByTagName('input')[1].value;
+        var username = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
 
         //get salt from server
         var salt = '';
         var xhr = new XMLHttpRequest();
         xhr.open('GET','/salt?username='+username,false);
         xhr.onreadystatechange = function(){
-            if(xhr.readyState == 4 && xhr.status == 200){
+            if(xhr?.readyState == 4 && xhr.status == 200){
                 salt = xhr.responseText;
                 //hash password
-                var hash = bcrypt.hashSync(password,salt);
+                var hash = dcodeIO.bcrypt.hashSync(password,salt);
                 //send ajax request
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET','/login?username='+username+'&password='+hash,false);
-                xhr.onreadystatechange = function(){
-                    if(xhr.readyState == 4 && xhr.status == 200){
-                        if(xhr.responseText == 'success'){
-                            window.location.href = '/home';
-                        }
-                    } else if(xhr.readyState == 4 && xhr.status != 200){
+                var rq = new XMLHttpRequest();
+                rq.open('GET','/login?username='+username+'&password='+hash,false);
+                rq.onreadystatechange = function(){
+                    if(rq?.readyState == 4 && rq.status == 200){
+                        window.location.href = '/home';
+                    } else if(rq?.readyState == 4){
                         alert('Wrong username or password');
                     }
                 }
-            } else if(xhr.readyState == 4 && xhr.status != 200){
+                rq.send();
+            } else if(xhr?.readyState == 4){
                 alert('Error: '+xhr.status);
             }
         }

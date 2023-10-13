@@ -61,7 +61,7 @@ login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
 
-users = {'a': {'password': 'a'}}
+users = {'a': {'password': '$2a$12$R34/rrqUKhdicsq8cqUwyOK6lu9qgBUZZ0kllddRWDcPsidTF9SCG'}}
 
 class User(flask_login.UserMixin):
     pass
