@@ -21,24 +21,17 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/login')
+@app.route('/login', methods = ["POST","GET"])
 def login():
     if request.method == 'GET':
         return render_template("login.html")
-        '''
-                <form action='login' method='POST'>
-                <input type='text' name='email' id='email' placeholder='email'/>
-                <input type='password' name='password' id='password' placeholder='password'/>
-                <input type='submit' name='submit'/>
-                </form>
-                '''
 
     email = request.form['email']
-    if email in users and Flask.request.form['password'] == users[email]['password']:
+    if email in users and request.form['password'] == users[email]['password']:
         user = User()
         user.id = email
         flask_login.login_user(user)
-        return Flask.redirect(Flask.url_for('protected'))
+        return redirect(url_for('protected'))
 
     return 'Bad login'
 
@@ -66,7 +59,7 @@ login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
 
-users = {'foo@bar.tld': {'password': 'secret'}}
+users = {'a': {'password': 'a'}}
 
 class User(flask_login.UserMixin):
     pass
