@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, request, render_template
+from flask import Flask, redirect, url_for, request, render_template, abort
 import flask_login
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user
 
@@ -23,17 +23,17 @@ def home():
 
 @app.route('/login', methods = ["POST","GET"])
 def login():
-    if request.method == 'GET':
+    username = request.args.get('username', None)
+    if username == None:
         return render_template("login.html")
 
-    email = request.form['email']
-    if email in users and request.form['password'] == users[email]['password']:
+    if username in users.keys() and request.args.get('password', None) == users[username]['password']:
         user = User()
-        user.id = email
+        user.id = username
         flask_login.login_user(user)
         return redirect(url_for('protected'))
 
-    return 'Bad login'
+    abort(401)
 
 
 @app.route('/register')
@@ -55,13 +55,14 @@ def logout():
 def salt():
     if request.args.get('username') == "aaa":
         return "$2a$12$R34/rrqUKhdicsq8cqUwyOK6lu"
+    return ""
 
 #Flask Login
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
 
-users = {'a': {'password': '$2a$12$R34/rrqUKhdicsq8cqUwyOK6lu9qgBUZZ0kllddRWDcPsidTF9SCG'}}
+users = {'aaa': {'password': '$2a$12$R34/rrqUKhdicsq8cqUwyOK6lu9qgBUZZ0kllddRWDcPsidTF9SCG'}}
 
 class User(flask_login.UserMixin):
     pass
