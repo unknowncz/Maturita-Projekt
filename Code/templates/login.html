@@ -58,6 +58,7 @@ https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js
                 rq.onreadystatechange = function(){
                     if(rq?.readyState == 4 && rq.status == 200){
                         console.info("login success");
+                        window.location.href = '/home';
                     } else if(rq?.readyState == 4){
                         alert('Wrong username or password');
                     }

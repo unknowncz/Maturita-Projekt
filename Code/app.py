@@ -31,7 +31,7 @@ def login():
         user = User()
         user.id = username
         flask_login.login_user(user)
-        return redirect(url_for('protected'))
+        return "Login success. Redirecting..."
 
     abort(401)
 
@@ -40,7 +40,7 @@ def login():
 def register():
     return render_template("debug.html") #Sends the client to the void
 
-@app.route('/protected')
+@app.route('/home')
 @flask_login.login_required
 def protected():
     return 'Logged in as: ' + flask_login.current_user.id
