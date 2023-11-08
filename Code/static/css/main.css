@@ -2,12 +2,26 @@ body {
     margin: 0;
 }
 
-#navbar {
-    position: absolute;
-    width: calc(100% - 50px);
-    top: 0;
-    right: 0;
-    height: 50px;
-    background-color: #1f1f1f;
+.navbar{
+    height: 60px;
+    color: #ffffff;
     padding: 0;
+    margin: 0;
+}
+
+.center {
+    align-self: center;
+    text-align: center;
+}
+
+.right {
+    align-self: right;
+    text-align: right;
+}
+
+#navbar-container {
+    width: 100%;
+    background-color: #1f1f1f;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
