@@ -43,7 +43,7 @@ def register():
 @app.route('/home')
 @flask_login.login_required
 def protected():
-    return 'Logged in as: ' + flask_login.current_user.id
+    return render_template('main.html')
 
 @app.route('/logout')
 def logout():
