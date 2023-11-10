@@ -41,7 +41,7 @@ def register():
     return render_template("debug.html") #Sends the client to the void
 
 @app.route('/home')
-@flask_login.login_required
+@login_required
 def protected():
     return render_template('main.html')
 

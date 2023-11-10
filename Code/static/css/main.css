@@ -1,6 +1,12 @@
+html {
+    height: 100%;
+}
+
 body {
     margin: 0;
-    background-color: #1f1f3f;
+    background: linear-gradient(#4444b9 25%, #ffffff 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .navbar{
@@ -22,7 +28,7 @@ body {
 
 #navbar-container {
     width: 100%;
-    background-color: #1f1f1f;
+    background-color: #094bad;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
